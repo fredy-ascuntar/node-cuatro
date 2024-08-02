@@ -3,11 +3,12 @@ const cors = require("cors");
 const path = require("path");
 const connection = require("./model/database");
 const routeUsuario = require("./routes/routesUsuario").default;
+import { DB_HOST, DB_NAME, DB_PASSWORD, DB_USER, PORT } from "./config.js";
 
 class Server {
   constructor() {
     this.app = express();
-    this.app.set("port", 4077);
+    this.app.set("port", PORT);
     this.app.use(express.json());
     this.app.use(cors());
 
@@ -22,7 +23,7 @@ class Server {
     this.app.use(new routeUsuario().ruta);
 
     this.app.listen(4077, () => {
-      console.log("Corriendo en puerto " + 4077);
+      console.log("Corriendo en puerto " + PORT);
     });
 
     this.connectionBd;
